@@ -1,0 +1,29 @@
+{
+  "loginContainer": {
+    "login": "Sign in",
+    "userName": "User name",
+    "password": "Password",
+    "email": "Email Address",
+    "forgot": "Forgot password?",
+    "dontHaveAccount": "Don't have an account? Sign Up"
+  },
+  "registerContainer": {
+    "register": "Signup",
+    "userName": "User name",
+    "password": "Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "readyHaveAccount": "Already have an account? Sign in"
+  },
+  "headerComponent": {
+    "login": "Login",
+    "register": "Signup",
+    "menu": "Menu",
+    "aboutMe": "Aboutme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "crawlerAdmin": {
+    
+  }
+}
