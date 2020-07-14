@@ -9,7 +9,6 @@ import HeaderComponent from 'root/components/layouts/header'
 const HomeContainer = React.lazy(() => import('root/containers/home'))
 const LoginContainer = React.lazy(() => import('root/containers/login'))
 const RegisterContainer = React.lazy(() => import('root/containers/register'))
-const CrawlerAdminContainer = React.lazy(() => import('root/containers/crawlerAdmin'))
 
 const publicRoute = [
   {
@@ -29,14 +28,7 @@ const publicRoute = [
     component: makeSuspenseComponent(RegisterContainer),
     isExact: false,
     layout: {}
-  },
-  //move to private route later
-  {
-    path: appRoutesPath.crawlerAdmin,
-    component: makeSuspenseComponent(CrawlerAdminContainer),
-    isExact: false,
-    layout: {}
-  },
+  }
 ]
 
 const privateRoute = [
@@ -58,10 +50,10 @@ const history = createBrowserHistory()
 const Routes = () => (
   <Router history={history}>
     <Switch>
-      <Route path="/" exact component={useMultiThemes(useLocalization(useLayout({ header: HeaderComponent }, (makeSuspenseComponent(HomeContainer)))))} />
+      <Route path="/" exact component={useMultiThemes(useLocalization(useLayout({ }, (makeSuspenseComponent(HomeContainer)))))} />
       {renderPublicRoute()}
       {renderPrivateRoute()}
-      <Route component={() => { return (<div>not found</div>) }} />
+      {/* <Route component={() => { return (<div>not found</div>) }} /> */}
     </Switch>
   </Router>
 );
