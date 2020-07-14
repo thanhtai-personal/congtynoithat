@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
+import MouseAnimate from 'root/components/commons/mouseAnimate'
+import CarouselSlider from './carouselSlider'
+import {
+  Paper,
+  Button,
+} from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -24,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     cursor: 'grab',
     ':active': {
-      cursor: 'grabing'  
+      cursor: 'grabing'
     }
   },
   green: {
     width: 'calc(100vw - 0px)', height: '100vh', backgroundColor: 'green',
-    animation: `$slideEffect 3000ms ${theme.transitions.easing.easeInOut}`
+    // animation: `$slideEffect 3000ms ${theme.transitions.easing.easeInOut}`
   },
   red: {
     width: 'calc(100vw - 0px)', height: '20vh', backgroundColor: 'red'
@@ -65,26 +71,18 @@ const useStyles = makeStyles((theme) => ({
     background: '#7fcdff',
     borderColor: 'steelblue'
   },
-  circle1: {
-    animation: `$pulse 1.8s ${theme.transitions.duration.enteringScreen}`,
+  project: {
+    position: 'relative',
+    height: '100vh',
+    overflow: 'hidden',
+    padding: '20px',
   },
-  circle2: {
-    animation: `$pulse 2s ${theme.transitions.duration.enteringScreen}`,
-  },
-  circle3: {
-    animation: `$pulse 2.2s ${theme.transitions.duration.enteringScreen}`,
-  },
-  circle4: {
-    animation: `$pulse 2.4s ${theme.transitions.duration.enteringScreen}`,
-  },
-  circle5: {
-    animation: `$pulse 2.6s ${theme.transitions.duration.enteringScreen}`,
-  },
-  circle6: {
-    animation: `$pulse 2.8s ${theme.transitions.duration.enteringScreen}`,
-  },
-  circle7: {
-    animation: `$pulse 3s ${theme.transitions.duration.enteringScreen}`,
+  checkButton: {
+      marginTop: '40px',
+      color: 'white',
+      fontSize: '25px',
+      border: '3px solid white',
+      textTransform: 'capitalize',
   },
   '@keyframes slideEffect': {
     '0%': {
@@ -95,87 +93,73 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
       height: '100vh'
     }
-  },
-  '@keyframes pulse': {
-    '0%': {
-      opacity: 0.2,
-      height: '0.5em',
-      width: '0.5em',
-      marginTop: '-0.5em',
-      marginLeft: '-0.5em',
-    },
-    '50%': {
-      opacity: 0.9,
-      height: '1.5em',
-      width: '1.5em',
-      marginTop: '-1.5em',
-      margiLeft: '-1.5em',
-    },
-    '100%': {
-      opacity: 0.2,
-      height: '0.5em',
-      width: '0.5em',
-      marginTop: '-0.5em',
-      marginLeft: '-0.5em',
-    }
   }
 }))
+
+const items = [
+  {
+      name: 'Lear Music Reader',
+      description: 'A PDF Reader specially designed for musicians.',
+      color: '#64ACC8'
+  },
+  {
+      name: 'Hash Code 2019',
+      description: 'My Solution on the 2019 Hash Code by Google Slideshow problem.',
+      color: '#7D85B1'
+  },
+  {
+      name: 'Terrio',
+      description: 'A exciting mobile game game made in the Unity Engine.',
+      color: '#CE7E78'
+  },
+  {
+      name: 'React Carousel',
+      description: 'A Generic carousel UI component for React using material ui.',
+      color: '#C9A27E'
+  }
+]
+
+
 const HomeComponent = (props: any, state: any) => {
   const classes = useStyles()
   const { } = props
-  useEffect(() => {
-    let follower = document.getElementById('follower') || { style: { top: '', left: '' } }
-    let mouseX = (event: any) => {
-      return (window.scrollX || 0) + event.clientX
-    }
-    let mouseY = (event: any) => {
-      return (window.scrollY || 0) + event.clientY
-    }
-
-    let positionElement = (event: any, isScroll = false) => {
-      let mouse = {
-        x: mouseX(event),
-        y: mouseY(event)
-      }
-      follower.style.top = `${mouse.y}px`
-      return follower.style.left = `${mouse.x}px`
-    }
-    window.addEventListener('mousemove', (event: any) => {
-      let _event = event
-      return setTimeout(() => {
-        return positionElement(_event)
-      }, 100)
-    })
-    return () => {
-      window.removeEventListener('mousemove', (event: any) => {
-        let _event = event
-        return setTimeout(() => {
-          return positionElement(_event)
-        }, 100)
-      })
-    }
-  }, [])
-
-  const keyDownOnRoot = (event: any) => {
-
-  }
 
   return (
     <div className={classes.root}>
-      {/* <TopBarMenu /> */}
-      {/* <CarouselSlider /> */}
+      <MouseAnimate />
+      <CarouselSlider
+        id='carousel-slider'
+        className={classes.green}
+        autoPlay={false}
+        timer={500}
+        animation={'slide'}
+        indicators={true}
+        timeout={500}
+        navButtonsAlwaysVisible={false}
+      >
+        {
+          items.map((item, index) => {
+            return (<Paper 
+              key={index}
+            className={classes.project}
+            style={{
+                backgroundColor: item.color, 
+            }}
+            elevation={10}
+        >
+            <h2>{item.name}</h2>
+            <p>{item.description}</p>
+
+            <Button className={classes.checkButton}>
+                Check it out!
+            </Button>
+        </Paper>)
+          })
+        }
+      </CarouselSlider>
       {/* <Projects /> */}
       {/* <CompanyInfo /> */}
       {/* <Footer /> */}
-      <div id='follower' className={classes.follower} onKeyDown={keyDownOnRoot}>
-        <div className={`${classes.circle} ${classes.circle1}`}></div>
-        <div className={`${classes.circle} ${classes.circle2}`}></div>
-        <div className={`${classes.circle} ${classes.circle3}`}></div>
-        <div className={`${classes.circle} ${classes.circle4}`}></div>
-        <div className={`${classes.circle} ${classes.circle5}`}></div>
-        <div className={`${classes.circle} ${classes.circle6}`}></div>
-        <div className={`${classes.circle} ${classes.circle7}`}></div>
-      </div>
       <div style={{
         position: 'fixed',
         float: 'right',
@@ -184,7 +168,6 @@ const HomeComponent = (props: any, state: any) => {
         backgroundColor: 'red'
       }}>
       </div>
-      <div id='green' className={classes.green}></div>
       <div id='red' className={classes.red}></div>
       <div id='white' className={classes.white}></div>
       <div id='yellow' className={classes.yellow}></div>
