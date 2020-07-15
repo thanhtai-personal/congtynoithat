@@ -4,7 +4,6 @@ export const lightTheme = createMuiTheme({
   overrides: {
     MuiCard: {
       root: {
-        backgroundColor: 'bisque',
         display: 'flex',
         float: 'left',
       }

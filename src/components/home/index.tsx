@@ -3,9 +3,12 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import MouseAnimate from 'root/components/commons/mouseAnimate'
 import CarouselSlider from './carouselSlider'
+import ProductCard from './productCard'
 import {
   Paper,
-  Button,
+  Typography,
+  Container,
+  Grid
 } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
@@ -29,60 +32,64 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     cursor: 'grab',
-    ':active': {
-      cursor: 'grabing'
-    }
+    backgroundColor: 'rgba(255,228,196,0.8)'
   },
-  green: {
-    width: 'calc(100vw - 0px)', height: '100vh', backgroundColor: 'green',
+  caroselSlider: {
+    width: 'calc(100vw - 0px)', height: '95vh'
     // animation: `$slideEffect 3000ms ${theme.transitions.easing.easeInOut}`
   },
-  red: {
-    width: 'calc(100vw - 0px)', height: '20vh', backgroundColor: 'red'
+  introduce: {
+    width: 'calc(100vw - 0px)',
+    padding: theme.spacing(2),
+    paddingRight: theme.spacing(4),
+    marginTop: theme.spacing(5)
   },
-  white: {
-    width: 'calc(100vw - 0px)', height: '30vh', backgroundColor: 'white'
+  section: {
+    width: 'calc(100vw - 0px)',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(2),
+    marginLeft: theme.spacing(4)
   },
-  yellow: {
-    width: 'calc(100vw - 0px)', height: '20vh', backgroundColor: 'yellow'
+  contact: {
+    width: 'calc(100vw - 0px)',
+    backgroundColor: 'rgba(30,30,30,1)',
+    color: 'rgba(255,255,255,1)',
+    padding: theme.spacing(2),
+    paddingRight: theme.spacing(4)
   },
-  steelblue: {
-    width: 'calc(100vw - 0px)', height: '50vh', backgroundColor: 'steelblue'
+  footer: {
+    width: 'calc(100vw - 0px)',
+    height: '5vh',
+    maxHeight: '75px',
+    minHeight: '50px',
+    backgroundColor: 'rgba(18,18,18,1)',
+    color: 'rgba(255,255,255,1)',
+    bottom: 0
   },
-  pink: {
-    width: 'calc(100vw - 0px)', height: '35vh', backgroundColor: 'pink'
+  footerText: {
+    fontSize: '0.7em',
+    padding: '10px',
   },
-  follower: {
-    position: 'absolute',
-    top: '0%',
-    left: '0%'
-  },
-  circle: {
-    position: 'absolute',
-    borderRadius: '50%',
-    border: 'solid 1px',
-    height: '0em',
-    width: '0em',
-    marginTop: '0em',
-    marginLeft: '0em',
-    alignContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    background: '#7fcdff',
-    borderColor: 'steelblue'
+  selectedText: {
+    cursor: 'text',
+    userSelect: 'text',          
+    '::selection': {
+      color: 'black',
+      background: 'yellow'
+    }
   },
   project: {
     position: 'relative',
-    height: '100vh',
+    height: '95vh',
     overflow: 'hidden',
     padding: '20px',
   },
   checkButton: {
-      marginTop: '40px',
-      color: 'white',
-      fontSize: '25px',
-      border: '3px solid white',
-      textTransform: 'capitalize',
+    marginTop: '40px',
+    color: 'white',
+    fontSize: '25px',
+    border: '3px solid white',
+    textTransform: 'capitalize',
   },
   '@keyframes slideEffect': {
     '0%': {
@@ -98,24 +105,24 @@ const useStyles = makeStyles((theme) => ({
 
 const items = [
   {
-      name: 'Lear Music Reader',
-      description: 'A PDF Reader specially designed for musicians.',
-      color: '#64ACC8'
+    name: 'Image test 1',
+    description: 'A PDF Reader specially designed for musicians.',
+    image: 'https://noithatanhung.vn/uploads/images/bai-viet/pham-thuy/6-2018/12/noi-that-phong-khach-go-oc-cho-1-.jpg'
   },
   {
-      name: 'Hash Code 2019',
-      description: 'My Solution on the 2019 Hash Code by Google Slideshow problem.',
-      color: '#7D85B1'
+    name: 'Image test 2',
+    description: 'My Solution on the 2019 Hash Code by Google Slideshow problem.',
+    image: 'https://thietkenoithat.com/Portals/0/xNews/uploads/2018/10/23/20-thiet-ke-noi-that-phong-khach-nha-ong-dep-me-ly-27_1.jpg'
   },
   {
-      name: 'Terrio',
-      description: 'A exciting mobile game game made in the Unity Engine.',
-      color: '#CE7E78'
+    name: 'Image test 3',
+    description: 'A exciting mobile game game made in the Unity Engine.',
+    image: 'https://noithatkhonggiandep.vn/wp-content/uploads/2017/12/PHONG-SHC_View02.jpg'
   },
   {
-      name: 'React Carousel',
-      description: 'A Generic carousel UI component for React using material ui.',
-      color: '#C9A27E'
+    name: 'Image test 4',
+    description: 'A Generic carousel UI component for React using material ui.',
+    image: 'https://gotrangtri.vn/wp-content/uploads/2019/04/anh-bia-2.jpg'
   }
 ]
 
@@ -129,50 +136,102 @@ const HomeComponent = (props: any, state: any) => {
       <MouseAnimate />
       <CarouselSlider
         id='carousel-slider'
-        className={classes.green}
-        autoPlay={false}
+        className={classes.caroselSlider}
+        autoPlay={true}
         timer={500}
-        animation={'slide'}
+        animation={'fade'}
         indicators={true}
         timeout={500}
         navButtonsAlwaysVisible={false}
       >
         {
           items.map((item, index) => {
-            return (<Paper 
+            return (<Paper
               key={index}
-            className={classes.project}
-            style={{
-                backgroundColor: item.color, 
-            }}
-            elevation={10}
-        >
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-
-            <Button className={classes.checkButton}>
-                Check it out!
-            </Button>
-        </Paper>)
+              className={classes.project}
+              style={{
+                backgroundImage: `url(${item.image})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat'
+              }}
+              elevation={10}
+            >
+            </Paper>)
           })
         }
       </CarouselSlider>
-      {/* <Projects /> */}
-      {/* <CompanyInfo /> */}
-      {/* <Footer /> */}
-      <div style={{
-        position: 'fixed',
-        float: 'right',
-        top: '30px',
-        right: '30px',
-        backgroundColor: 'red'
-      }}>
+      <Container maxWidth='lg'>
+        <div id='introduce' className={`${classes.introduce} ${classes.selectedText}`}>
+          Nổi tiếng trong giới thiết kế nội thất, thi công nội thất, với hơn 10 năm chuyên thiết kế thi công nội thất hàng nghìn công trình trong cả nước, nội thất MOREHOME hiểu rõ tầm quan trọng của dịch vụ trang trí nhà đặc biệt thiết kế nội thất. Vì vậy MOREHOME xin giới thiệu quý gia chủ tổng hợp toàn bộ mẫu thiết kế nội that chung cư, biệt thự, văn phòng, khách sạn, nhà phố, nhà liền kề, nhà mái thái,...mà kts hàng đầu MOREHOME đem lại.
+        </div>
+      </Container>
+      <Grid className={classes.section} key={`products-${0}`} container spacing={1}>
+        <Grid key={`product-1-${0}`} item xs={12}>
+          <Typography variant='h4'> PRODUCT TYPE 1</Typography>
+        </Grid>
+        <Grid key={`product-1-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+        <Grid key={`product-2-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+        <Grid key={`product-3-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+      </Grid>
+      <Grid className={classes.section} key={`products-${0}`} container spacing={1}>
+        <Grid key={`product-1-${0}`} item xs={12}>
+          <Typography variant='h4'> PRODUCT TYPE 2</Typography>
+        </Grid>
+        <Grid key={`product-1-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+        <Grid key={`product-2-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+        <Grid key={`product-3-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+      </Grid>
+      <Grid className={classes.section} key={`products-${0}`} container spacing={1}>
+        <Grid key={`product-1-${0}`} item xs={12}>
+          <Typography variant='h4'> PRODUCT TYPE 3</Typography>
+        </Grid>
+        <Grid key={`product-1-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+        <Grid key={`product-2-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+        <Grid key={`product-3-${0}`} item xs={4}>
+          <ProductCard />
+        </Grid>
+      </Grid>
+      <div id='contact' className={`${classes.contact} ${classes.selectedText}`}>
+        MOREHOME TP Hồ chí Minh
+          Văn phòng thiết kế và thi công:<br />
+          <br />
+          + Địa chỉ: Tầng 3, Tòa T6-08, Đường Tôn Quang Phiệt, Quận Bắc Từ Liêm, Hà Nội(Khu đô thị Nam Cường, đối diện chéo bộ Công An)<br />
+          <br />
+          + Giờ làm việc: 8:00 - 17:30 các ngày trong tuần từ thứ 2 đến thứ 7<br />
+          <br />
+          + Xưởng gỗ tự nhiên: Xã Thượng Cát, Từ Liêm, Hà Nội<br />
+          <br />
+          + Xưởng gỗ công nghiệp: Lô B2-3-6 - Khu công nghiệp Nam Thăng Long - Quận Bắc Từ Liêm - Hà Nội<br />
+          <br />
+          + Xưởng đá nội thất: Lô B2-3-6 - Khu công nghiệp Nam Thăng Long - Quận Bắc Từ Liêm - Hà Nội.<br />
+          <br />
+          + Xưởng sản xuất tranh kính {'&'} Kính nội thất: Xã Thượng Cát, Từ Liêm, Hà Nội.<br />
+          <br />
+          + Có chỗ để xe ô tô thoải mái<br />
+          <br />
+          + Hotline: 097.2828.264 (Mr.Đạt)<br />
+          <br />
+          + Email: chinh@morehome.vn<br />
       </div>
-      <div id='red' className={classes.red}></div>
-      <div id='white' className={classes.white}></div>
-      <div id='yellow' className={classes.yellow}></div>
-      <div id='steelblue' className={classes.steelblue}></div>
-      <div id='pink' className={classes.pink}></div>
+      <div id='footer' className={classes.footer}>
+        <Typography className={`${classes.footerText} ${classes.selectedText}`}>Copyright 2020 by Thanh Tài Trần | Privacy Statement | Terms Of Use</Typography>
+      </div>
     </div>
   )
 }

@@ -5,7 +5,8 @@ const useStyles = makeStyles((theme) => ({
   follower: {
     position: 'absolute',
     top: '0%',
-    left: '0%'
+    left: '0%',
+    zIndex: 99999,
   },
   circle: {
     position: 'absolute',
