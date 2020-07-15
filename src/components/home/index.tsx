@@ -13,7 +13,6 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
-    overflowX: 'hidden',
     overflowY: 'auto',
     '*::-webkit-scrollbar-thumb': {
       background: 'steelblue',
@@ -44,12 +43,6 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(4),
     marginTop: theme.spacing(5)
   },
-  section: {
-    width: 'calc(100vw - 0px)',
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(4)
-  },
   contact: {
     width: 'calc(100vw - 0px)',
     backgroundColor: 'rgba(30,30,30,1)',
@@ -72,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
   selectedText: {
     cursor: 'text',
-    userSelect: 'text',          
+    userSelect: 'text',
     '::selection': {
       color: 'black',
       background: 'yellow'
@@ -84,12 +77,29 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     padding: '20px',
   },
-  checkButton: {
-    marginTop: '40px',
-    color: 'white',
-    fontSize: '25px',
-    border: '3px solid white',
-    textTransform: 'capitalize',
+  section: {
+    width: '100%',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(2)
+  },
+  sectionImage: {
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    width: '100%',
+    height: '300px',
+    display: 'flex'
+  },
+  imageText: {
+    width: '100%',
+    height: '100%',
+    textAlign: 'center',
+    color: 'yellow',
+    backgroundColor: 'rgba(255,255,255,0)',
+    paddingTop: theme.spacing(20),
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.3)'
+    }
   },
   '@keyframes slideEffect': {
     '0%': {
@@ -162,71 +172,60 @@ const HomeComponent = (props: any, state: any) => {
       </CarouselSlider>
       <Container maxWidth='lg'>
         <div id='introduce' className={`${classes.introduce} ${classes.selectedText}`}>
-          Nổi tiếng trong giới thiết kế nội thất, thi công nội thất, với hơn 10 năm chuyên thiết kế thi công nội thất hàng nghìn công trình trong cả nước, nội thất MOREHOME hiểu rõ tầm quan trọng của dịch vụ trang trí nhà đặc biệt thiết kế nội thất. Vì vậy MOREHOME xin giới thiệu quý gia chủ tổng hợp toàn bộ mẫu thiết kế nội that chung cư, biệt thự, văn phòng, khách sạn, nhà phố, nhà liền kề, nhà mái thái,...mà kts hàng đầu MOREHOME đem lại.
+          Nổi tiếng trong giới thiết kế nội thất, thi công nội thất, với hơn 10 năm chuyên thiết kế thi công nội thất hàng nghìn công trình trong cả nước, nội thất MOREHOME hiểu rõ tầm quan trọng của dịch vụ trang trí nhà đặc biệt thiết kế nội thất. Vì vậy MOREHOME xin giới thiệu quý gia chủ tổng hợp toàn bộ mẫu thiết kế nội thất chung cư, biệt thự, văn phòng, khách sạn, nhà phố, nhà liền kề, nhà mái thái,...mà kts hàng đầu MOREHOME đem lại.
         </div>
       </Container>
-      <Grid className={classes.section} key={`products-${0}`} container spacing={1}>
-        <Grid key={`product-1-${0}`} item xs={12}>
-          <Typography variant='h4'> PRODUCT TYPE 1</Typography>
+      <Container maxWidth='lg'>
+        <Grid className={classes.section} key={`products-${0}`} container spacing={1}>
+          <Grid key={`product-1-${0}`} item xs={12}>
+            <Typography variant='h4'> </Typography>
+          </Grid>
+          <Grid key={`product-1-${0}`} item xs={12}>
+            <Paper style={{
+              backgroundImage: 'url(https://inconcept.vn/Content/img/product/menu-img-01.jpg)',
+            }}
+            className={classes.sectionImage}>
+              <div className={classes.imageText}>ĐẴNG CẤP TỪ CHẤT LƯỢNG</div>
+            </Paper>
+          </Grid>
+          <Grid key={`product-2-${0}`} item xs={6}>
+            <Paper style={{
+              backgroundImage: 'url(https://inconcept.vn/Content/img/product/menu-img-02.jpg)'
+            }}
+            className={classes.sectionImage}>
+              <div className={classes.imageText}>DUYÊN DÁNG VÀ THANH LỊCH</div>
+            </Paper>
+          </Grid>
+          <Grid key={`product-3-${0}`} item xs={6}>
+            <Paper style={{
+              backgroundImage: 'url(https://inconcept.vn/Content/img/product/menu-img-03.jpg)',
+            }}
+            className={classes.sectionImage}>
+              <div className={classes.imageText}>TINH TẾ TRONG TỪNG ĐƯỜNG NÉT</div>
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid key={`product-1-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-        <Grid key={`product-2-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-        <Grid key={`product-3-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-      </Grid>
-      <Grid className={classes.section} key={`products-${0}`} container spacing={1}>
-        <Grid key={`product-1-${0}`} item xs={12}>
-          <Typography variant='h4'> PRODUCT TYPE 2</Typography>
-        </Grid>
-        <Grid key={`product-1-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-        <Grid key={`product-2-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-        <Grid key={`product-3-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-      </Grid>
-      <Grid className={classes.section} key={`products-${0}`} container spacing={1}>
-        <Grid key={`product-1-${0}`} item xs={12}>
-          <Typography variant='h4'> PRODUCT TYPE 3</Typography>
-        </Grid>
-        <Grid key={`product-1-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-        <Grid key={`product-2-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-        <Grid key={`product-3-${0}`} item xs={4}>
-          <ProductCard />
-        </Grid>
-      </Grid>
+      </Container>
       <div id='contact' className={`${classes.contact} ${classes.selectedText}`}>
         MOREHOME TP Hồ chí Minh
           Văn phòng thiết kế và thi công:<br />
-          <br />
+        <br />
           + Địa chỉ: Tầng 3, Tòa T6-08, Đường Tôn Quang Phiệt, Quận Bắc Từ Liêm, Hà Nội(Khu đô thị Nam Cường, đối diện chéo bộ Công An)<br />
-          <br />
+        <br />
           + Giờ làm việc: 8:00 - 17:30 các ngày trong tuần từ thứ 2 đến thứ 7<br />
-          <br />
+        <br />
           + Xưởng gỗ tự nhiên: Xã Thượng Cát, Từ Liêm, Hà Nội<br />
-          <br />
+        <br />
           + Xưởng gỗ công nghiệp: Lô B2-3-6 - Khu công nghiệp Nam Thăng Long - Quận Bắc Từ Liêm - Hà Nội<br />
-          <br />
+        <br />
           + Xưởng đá nội thất: Lô B2-3-6 - Khu công nghiệp Nam Thăng Long - Quận Bắc Từ Liêm - Hà Nội.<br />
-          <br />
+        <br />
           + Xưởng sản xuất tranh kính {'&'} Kính nội thất: Xã Thượng Cát, Từ Liêm, Hà Nội.<br />
-          <br />
+        <br />
           + Có chỗ để xe ô tô thoải mái<br />
-          <br />
+        <br />
           + Hotline: 097.2828.264 (Mr.Đạt)<br />
-          <br />
+        <br />
           + Email: chinh@morehome.vn<br />
       </div>
       <div id='footer' className={classes.footer}>
