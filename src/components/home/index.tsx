@@ -2,14 +2,15 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import MouseAnimate from 'root/components/commons/mouseAnimate'
+import GoogleMapComponent from './map'
 import CarouselSlider from './carouselSlider'
-import ProductCard from './productCard'
 import {
   Paper,
   Typography,
   Container,
   Grid
 } from '@material-ui/core'
+import FacebookMessenger from './facebookMessenger'
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -177,7 +178,7 @@ const HomeComponent = (props: any, state: any) => {
       </Container>
       <Container maxWidth='lg'>
         <Grid className={classes.section} key={`products-${0}`} container spacing={1}>
-          <Grid key={`product-1-${0}`} item xs={12}>
+          <Grid key={`product-1-${'0000'}`} item xs={12}>
             <Typography variant='h4'> </Typography>
           </Grid>
           <Grid key={`product-1-${0}`} item xs={12}>
@@ -206,6 +207,16 @@ const HomeComponent = (props: any, state: any) => {
           </Grid>
         </Grid>
       </Container>
+      <Container maxWidth='lg'>
+        <GoogleMapComponent 
+          isMarkerShown
+          googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places'
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
+      </Container>
+      <FacebookMessenger />
       <div id='contact' className={`${classes.contact} ${classes.selectedText}`}>
         MOREHOME TP Hồ chí Minh
           Văn phòng thiết kế và thi công:<br />
